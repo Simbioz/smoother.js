@@ -10,7 +10,22 @@ Smooth a queue of values with a simple moving average. Useful for input smoothin
 
 # Usage
 
-TODO!
+    // Initialize a Smoother with a maximum number of values
+    // and a weight distribution function
+    
+    var smoother = new Smoother(5, "cubic");
+    
+    // Push values and observe the resulting smoothed value
+    
+    smoother.push(1);
+    smoother.push(3);
+    smoother.push(9);
+    
+    console.log(smoother.value); // Outputs 7.444
+    
+    smoother.push(15);
+    
+    console.log(smoother.value); // Outputs 12.28
 
 # Development
 
