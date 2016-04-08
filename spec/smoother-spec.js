@@ -4,7 +4,7 @@ describe("Smoother", function () {
   describe("values", function () {
     it("cannot contain more than [max values] values", function () {
       var maxValueCount = 4;
-      var smoother = new Smoother(maxValueCount);
+      var smoother = new Smoother(maxValueCount, "cubic");
       smoother.push(1);
       console.log(smoother.value);
       smoother.push(3);

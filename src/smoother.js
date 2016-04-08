@@ -10,6 +10,8 @@ var Smoother = function(maxValueCount, distribution) {
   function calculateWeight(a, distribution) {
     switch (distribution) {
       case "linear": return a;
+      case "quadratic": return Math.pow(a, 2);
+      case "cubic": return Math.pow(a, 3);
       default: throw "Unsupported weight distribution '" + distribution + "'";
     }
   }
@@ -22,6 +24,7 @@ var Smoother = function(maxValueCount, distribution) {
     var denominator = 0;
     for (var i = 0; i < valueCount; i++) {
       var weight = calculateWeight((i + 1) / valueCount, that.distribution);
+      console.log("WEIGHT: " + weight);
       var value = that.values[i];
       numerator += value * weight;
       denominator += weight;
