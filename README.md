@@ -2,13 +2,11 @@
 
 Smooth a queue of values with a weighted moving average. Useful for input smoothing and more.
 
-# Installation
-
-## Using NPM
+## Installation
 
     npm install smoother.js
 
-# Usage
+## Usage
 
 ```js
 // Initialize a Smoother with a maximum number of values
@@ -30,7 +28,7 @@ smoother.push(15);
 console.log(smoother.value); // Outputs 12.28
 ```
 
-# Development
+## Development
 
 1. Install development dependencies using `npm install`
 2. Build by running `gulp` (default task)
