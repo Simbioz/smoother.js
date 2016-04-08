@@ -1,6 +1,6 @@
 # smoother.js
 
-Smooth a queue of values with a simple moving average. Useful for input smoothing and more.
+Smooth a queue of values with a weighted moving average. Useful for input smoothing and more.
 
 # Installation
 
@@ -12,6 +12,7 @@ Smooth a queue of values with a simple moving average. Useful for input smoothin
 
     // Initialize a Smoother with a maximum number of values
     // and a weight distribution function
+    // (check out the source for available functions)
     
     var smoother = new Smoother(5, "cubic");
     
