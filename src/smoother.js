@@ -24,7 +24,6 @@ var Smoother = function(maxValueCount, distribution) {
     var denominator = 0;
     for (var i = 0; i < valueCount; i++) {
       var weight = calculateWeight((i + 1) / valueCount, that.distribution);
-      console.log("WEIGHT: " + weight);
       var value = that.values[i];
       numerator += value * weight;
       denominator += weight;
