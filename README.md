@@ -6,7 +6,7 @@ Smooth a queue of values with a simple weighted mean. Useful for input smoothing
 
 ## Using NPM
 
-    npm install sequencer.js
+    npm install smoother.js
 
 # Usage
 
