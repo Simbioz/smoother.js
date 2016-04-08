@@ -1,18 +1,19 @@
 var gulp = require('gulp');
 var plumber = require('gulp-plumber');
 var notify = require('gulp-notify');
+var uglify = require('gulp-uglify');
+var rename = require('gulp-rename');
 var jasmine = require('gulp-jasmine');
-var webpack = require('webpack-stream');
 
 var BUILD_DIR = 'dist/';
 
 gulp.task('default', ['build']);
 
 gulp.task('build', function() {
-  var webpackConfig = require('./webpack.config.js');
   return gulp.src('src/smoother.js')
     .pipe(plumber())
-    .pipe(webpack(webpackConfig))
+    .pipe(uglify())
+    .pipe(rename({ extname: ".min.js" }))
     .pipe(gulp.dest(BUILD_DIR));
 });
 

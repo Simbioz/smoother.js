@@ -4,15 +4,13 @@ var Smoother = function (maxValueCount) {
   this.values = [];
   this.value = null;
 
-  function push(value) {
+  this.push = function (value) {
     this.values.push(value);
 
     // Ensure we only keep maxValueCount values
-    if (this.values.count > this.maxValueCount)
+    if (this.values.length > this.maxValueCount)
       this.values.shift();
-
-    console.log(this.values);
-  }
+  };
 };
 
 module.exports = Smoother;

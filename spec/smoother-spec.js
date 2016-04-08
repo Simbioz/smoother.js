@@ -1,4 +1,4 @@
-var Smoother = require("../dist/smoother.js");
+var Smoother = require("../dist/smoother.min.js");
 
 describe("Smoother", function () {
   describe("values", function () {
