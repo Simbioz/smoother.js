@@ -12,7 +12,7 @@ Smooth a queue of values with a weighted moving average. Useful for input smooth
 
 ```js
 // Initialize a Smoother with a maximum number of values
-// and a weight distribution function
+// and a weight distribution function ("linear" if unspecified)
 // (check out the source for available functions)
 
 var smoother = new Smoother(5, "cubic");
