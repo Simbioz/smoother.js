@@ -1,13 +1,17 @@
-var Smoother = function(maxValueCount) {
+var Smoother = function(maxValueCount, distribution) {
   var that = this;
 
   this.maxValueCount = maxValueCount;
+  this.distribution = distribution || "linear";
 
   this.values = [];
   this.value = null;
 
-  function calculateWeight(index, valueCount) {
-    return (index + 1) * 1 / valueCount;
+  function calculateWeight(a, distribution) {
+    switch (distribution) {
+      case "linear": return a;
+      default: throw "Unsupported weight distribution '" + distribution + "'";
+    }
   }
 
   function updateValue() {
@@ -17,7 +21,7 @@ var Smoother = function(maxValueCount) {
     var numerator = 0;
     var denominator = 0;
     for (var i = 0; i < valueCount; i++) {
-      var weight = calculateWeight(i, valueCount);
+      var weight = calculateWeight((i + 1) / valueCount, that.distribution);
       var value = that.values[i];
       numerator += value * weight;
       denominator += weight;
