@@ -1,6 +1,6 @@
 # smoother.js
 
-Smooth a queue of values with a simple weighted mean. Useful for input smoothing and more.
+Smooth a queue of values with a simple moving average. Useful for input smoothing and more.
 
 # Installation
 
