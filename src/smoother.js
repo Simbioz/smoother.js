@@ -4,8 +4,11 @@ var Smoother = function(maxValueCount, distribution) {
   this.maxValueCount = maxValueCount;
   this.distribution = distribution || "linear";
 
+  this.isEnabled = true;
   this.values = [];
   this.value = null;
+
+  // Private Functions
 
   function calculateWeight(a, distribution) {
     switch (distribution) {
@@ -16,10 +19,16 @@ var Smoother = function(maxValueCount, distribution) {
     }
   }
 
-  function updateValue() {
+  function calculateValue() {
     var valueCount = that.values.length;
-    if (valueCount == 0) return;
 
+    // If there are no values to calculate a new value from, return the current value
+    if (valueCount == 0) return that.value;
+
+    // If smoothing is disabled, return the last value as-is
+    if (!that.isEnabled) return that.values[that.values.length - 1];
+
+    // Else calculate the moving average
     var numerator = 0;
     var denominator = 0;
     for (var i = 0; i < valueCount; i++) {
@@ -28,18 +37,29 @@ var Smoother = function(maxValueCount, distribution) {
       numerator += value * weight;
       denominator += weight;
     }
-
-    that.value = numerator / denominator;
+    return numerator / denominator;
   }
 
-  this.push = function(value) {
+  // Public Functions
+
+  this.push = function (value) {
     this.values.push(value);
 
     // Ensure we only keep maxValueCount values
     if (this.values.length > this.maxValueCount)
       this.values.shift();
 
-    updateValue();
+    this.value = calculateValue();
+  };
+
+  this.enable = function () {
+    this.isEnabled = true;
+    this.value = calculateValue();
+  };
+
+  this.disable = function () {
+    this.isEnabled = false;
+    this.value = calculateValue();
   };
 };
 
