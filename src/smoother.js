@@ -44,7 +44,7 @@ var Smoother = function(maxValueCount, distribution) {
     if (!that.isEnabled) return that.values[that.values.length - 1];
 
     // Eliminate outliers if there are enough samples in the data set
-    if (that.values.length > 2)
+    if (that.values.length >= 3)
       that.values = eliminateOutliers(that.values);
 
     var valueCount = that.values.count;
