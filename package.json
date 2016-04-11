@@ -1,6 +1,6 @@
 {
   "name": "smoother.js",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Smooth a queue of values with a simple weighted mean. Useful for input smoothing and more.",
   "homepage": "https://github.com/Simbioz/smoother.js",
   "author": {
