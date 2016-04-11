@@ -19,14 +19,35 @@ var Smoother = function(maxValueCount, distribution) {
     }
   }
 
-  function calculateValue() {
-    var valueCount = that.values.length;
+  function calculateMedian(sortedValues) {
+    var oddLength = sortedValues.length % 2 == 1;
+    if (oddLength) return sortedValues[Math.ceil(sortedValues.length / 2.0) - 1];
+    var lowerIndex = sortedValues.length / 2 - 1;
+    var upperIndex = sortedValues.length / 2;
+    return (sortedValues[lowerIndex] + sortedValues[upperIndex]) / 2.0;
+  }
 
+  function eliminateOutliers(values) {
+    var filteredValues = values.slice();
+    filteredValues.sort(function (a, b) { return a - b; });
+    var median = calculateMedian(filteredValues);
+    console.log("Values: " + filteredValues);
+    console.log("Median: " + median);
+    return filteredValues;
+  }
+
+  function calculateValue() {
     // If there are no values to calculate a new value from, return the current value
-    if (valueCount == 0) return that.value;
+    if (that.values.length == 0) return that.value;
 
     // If smoothing is disabled, return the last value as-is
     if (!that.isEnabled) return that.values[that.values.length - 1];
+
+    // Eliminate outliers if there are enough samples in the data set
+    if (that.values.length > 2)
+      that.values = eliminateOutliers(that.values);
+
+    var valueCount = that.values.count;
 
     // Else calculate the moving average
     var numerator = 0;
