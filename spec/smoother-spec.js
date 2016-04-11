@@ -1,8 +1,8 @@
 var Smoother = require("../dist/smoother.min.js");
 
 describe("Smoother", function () {
-  describe("values", function () {
-    it("cannot contain more than [max values] values", function () {
+  describe("queue", function () {
+    it("cannot contain more than [max value count] values", function () {
       var maxValueCount = 2;
       var smoother = new Smoother(maxValueCount, "cubic");
       smoother.push(1);
@@ -10,7 +10,23 @@ describe("Smoother", function () {
       smoother.push(9);
       expect(smoother.values.length).toEqual(maxValueCount);
     });
+  });
 
+  describe("behavior", function () {
+    it("should not smooth the value when disabled", function () {
+      var maxValueCount = 4;
+      var smoother = new Smoother(maxValueCount, "linear");
+      smoother.push(1);
+      smoother.push(3);
+      expect(smoother.value).toEqual(2.3333333333333335);
+      smoother.disable();
+      expect(smoother.value).toEqual(3);
+      smoother.push(9);
+      expect(smoother.value).toEqual(9);
+    });
+  });
+
+  describe("weight distributions", function () {
     it("should properly calculate value with linear weight distribution", function () {
       var maxValueCount = 4;
       var smoother = new Smoother(maxValueCount, "linear");
